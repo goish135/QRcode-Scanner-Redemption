@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
                 String number=num.getText().toString();
                 Day = (EditText)findViewById(R.id.day);
                 String day = Day.getText().toString();
-                String context = null;
+                String context = "";
 
                 int jud=0;
                 int range=0;
@@ -160,110 +160,94 @@ public class MainActivity extends AppCompatActivity {
                     int enter = 0;
                     jud = 0;
 
-
-                    if(day.equals(ym.substring(0,5))||day.equals(ym.substring(5,10))||day.equals(ym.substring(10,15))||day.equals(ym.substring(15,20))) {
-                        if (day.equals(ym.substring(0, 5)) || day.equals(ym.substring(5, 10))) {
-                            range = 1;
-                        }
-                        else
-                        {
-                            range = 2;
-                        }
-                        int cnt = 0;
-                        for (String target : ct2) {
-                            if (target.length() == 3) {
-                                if (target.equals(number.substring(5, 8))) {
-                                    context = "增開六獎";
-                                    break;
-                                }
-                                cnt = -1;
+                    if(number.length()==8&&day.length()==5) {
+                        if (day.equals(ym.substring(0, 5)) || day.equals(ym.substring(5, 10)) || day.equals(ym.substring(10, 15)) || day.equals(ym.substring(15, 20))) {
+                            if (day.equals(ym.substring(0, 5)) || day.equals(ym.substring(5, 10))) {
+                                range = 1;
                             } else {
-                                if (cnt == 0) {
+                                range = 2;
+                            }
+                            int cnt = 0;
+                            for (String target : ct2) {
+                                if (target.length() == 3) {
+                                    if (target.equals(number.substring(5, 8))) {
+                                        context = "增開六獎";
+                                        break;
+                                    }
+                                    cnt = -1;
+                                } else {
+                                    if (cnt == 0) {
 
-                                    if (enter == 0 && range == 1) {
-                                        jud = 1;
+                                        if (enter == 0 && range == 1) {
+                                            jud = 1;
+                                        } else if (enter == 1 && range == 2) {
+                                            jud = 1;
+                                        }
+                                        enter++;
+                                        //     context = target + "," + number+','+Integer.toString(enter) ;
+                                        if (target.equals(number) && jud == 1) {
+                                            context = "特別獎";
+                                            break;
+                                        }
+                                    } else if (cnt == 1) {
+                                        if (target.equals(number) && jud == 1) {
+                                            context = "特獎";
+                                            break;
+                                        }
+                                    } else if (cnt == 2 || cnt == 3 || cnt == 4) {
+                                        if (target.equals(number) && jud == 1) {
+                                            context = "頭獎";
+                                            break;
+                                        } else if (target.substring(1, 8).equals(number.substring(1, 8)) && jud == 1) {
+                                            context = "二獎";
+                                            break;
+                                        } else if (target.substring(2, 8).equals(number.substring(2, 8)) && jud == 1) {
+                                            context = "三獎";
+                                            break;
+                                        } else if (target.substring(3, 8).equals(number.substring(3, 8)) && jud == 1) {
+                                            context = "四獎";
+                                            break;
+                                        } else if (target.substring(4, 8).equals(number.substring(4, 8)) && jud == 1) {
+                                            context = "五獎";
+                                            break;
+                                        } else if (target.substring(5, 8).equals(number.substring(5, 8)) && jud == 1) {
+                                            context = "六獎";
+                                            break;
+                                        } else {
+                                            if (jud == 1)
+                                                context = "未中獎";
+                                        }
                                     }
-                                    else if (enter == 1 && range == 2) {
-                                        jud = 1;
-                                    }
-                                    enter++;
-                               //     context = target + "," + number+','+Integer.toString(enter) ;
-                                    if (target.equals(number)&&jud==1) {
-                                        context = "特別獎";
-                                        break;
-                                    }
-                                } else if (cnt == 1) {
-                                    if (target.equals(number)&&jud == 1) {
-                                        context = "特獎";
-                                        break;
-                                    }
-                                } else if (cnt == 2 || cnt == 3 || cnt == 4) {
-                                    if (target.equals(number)&&jud == 1) {
-                                        context = "頭獎";
-                                        break;
-                                    } else if (target.substring(1, 8).equals(number.substring(1, 8))&&jud == 1) {
-                                        context = "二獎";
-                                        break;
-                                    } else if (target.substring(2, 8).equals(number.substring(2, 8))&&jud == 1) {
-                                        context = "三獎";
-                                        break;
-                                    } else if (target.substring(3, 8).equals(number.substring(3, 8))&&jud == 1) {
-                                        context = "四獎";
-                                        break;
-                                    } else if (target.substring(4, 8).equals(number.substring(4, 8))&&jud == 1) {
-                                        context = "五獎";
-                                        break;
-                                    } else if (target.substring(5, 8).equals(number.substring(5, 8))&&jud == 1) {
-                                        context = "六獎";
-                                        break;
-                                    }
-                                     else {
-                                            if(jud == 1)
-                                               context = "未中獎";
-                                         }
+                                }
+
+                                cnt++;
+                            }
+                        } else {
+                            if (day.substring(0, 3).equals(ym.substring(5, 8))) {
+                                if (Integer.valueOf(day.substring(3, 5)) > Integer.valueOf(ym.substring(8, 10))) {
+                                    context = "媽祖叫你別急，兌獎時間還沒到!";
+                                }
+
+                            } else if (Integer.valueOf(day.substring(0, 3)) > Integer.valueOf(ym.substring(5, 8))) {
+                                context = "媽祖叫你別急，兌獎時間還沒到!";
+                            } else if (Integer.valueOf(day.substring(0, 3)) < Integer.valueOf(ym.substring(10, 13))) {
+                                context = "過期啦QQ";
+                            } else if (Integer.valueOf(day.substring(0, 3)) == Integer.valueOf(ym.substring(10, 13))) {
+                                if (Integer.valueOf(day.substring(3, 5)) < Integer.valueOf(ym.substring(13, 15))) {
+                                    context = "過期啦QQ";
                                 }
                             }
-
-                            cnt++;
+                            // context = "未在兌獎期限內";
                         }
+                        if (range == 1)
+                            context = ym.substring(0, 3) + '年' + ym.substring(3, 5) + '-' + ym.substring(8, 10) + '月' + ' ' + context;
+                        if (range == 2)
+                            context = ym.substring(10, 13) + '年' + ym.substring(13, 15) + '-' + ym.substring(18, 20) + '月' + ' ' + context;
                     }
-                    else
-                    {
-                        if(day.substring(0,3).equals(ym.substring(5,8)))
-                        {
-                            if(Integer.valueOf(day.substring(3,5))>Integer.valueOf(ym.substring(8,10)))
-                            {
-                                context = "媽祖叫你別急，兌獎時間還沒到!";
-                            }
-
-                        }
-                        else if(Integer.valueOf(day.substring(0,3))>Integer.valueOf(ym.substring(5,8)))
-                        {
-                            context = "媽祖叫你別急，兌獎時間還沒到!";
-                        }
-                        else if(Integer.valueOf(day.substring(0,3))<Integer.valueOf(ym.substring(10,13)))
-                        {
-                            context = "過期啦QQ";
-                        }
-                        else if(Integer.valueOf(day.substring(0,3))==Integer.valueOf(ym.substring(10,13)))
-                        {
-                            if(Integer.valueOf(day.substring(3,5))<Integer.valueOf(ym.substring(13,15)))
-                            {
-                                context = "過期啦QQ";
-                            }
-                        }
-                        // context = "未在兌獎期限內";
-                    }
-
-
-
                 }catch (IOException e) {
                     e.printStackTrace();
                 }
-                if(range==1)
-                context=ym.substring(0,3)+'年'+ym.substring(3,5)+'-'+ym.substring(8,10)+'月'+' '+context;
-                if(range==2)
-                    context=ym.substring(10,13)+'年'+ym.substring(13,15)+'-'+ym.substring(18,20)+'月'+' '+context;
+
 
                 AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
                 dialog.setTitle("Result:");
