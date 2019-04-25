@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".MainActivity"
+    tools:showIn="@layout/activity_main">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:orientation="vertical" >
+
+
+
+        <EditText
+            android:id="@+id/num"
+            android:inputType="phone"
+            android:layout_width="252dp"
+            android:layout_height="71dp"
+            android:layout_weight="0"
+            android:ems="2"
+            android:hint="輸入發票號碼(8個數字)"
+            android:maxLength="8"
+            android:singleLine="true">
+
+            <requestFocus />
+        </EditText>
+        <EditText
+            android:id="@+id/day"
+            android:inputType="phone"
+            android:layout_width="252dp"
+            android:layout_height="71dp"
+            android:layout_weight="0"
+            android:ems="2"
+            android:hint="輸入年月 ex:10804"
+            android:maxLength="5"
+            android:singleLine="true">
+        </EditText>
+        <EditText
+            android:id="@+id/ymym"
+            android:inputType="phone"
+            android:layout_width="252dp"
+            android:layout_height="71dp"
+            android:layout_weight="0"
+            android:ems="2"
+            android:hint="查詢年月 ex:10804"
+            android:maxLength="5"
+            android:layout_marginTop="50dp"
+            android:singleLine="true">
+        </EditText>
+
+
+
+
+        <TextView
+            android:id="@+id/tvCWJ"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:scrollbars="vertical"
+            android:maxLines="23"
+            android:layout_marginTop="30dp"
+            android:text=""
+            tools:ignore="MissingConstraints" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <Button
+            android:id="@+id/gocheck"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="255dp"
+            android:layout_marginTop="85dp"
+            android:text="兌獎" />
+
+
+        <Button
+            android:id="@+id/Button01"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="255dp"
+            android:layout_marginTop="30dp"
+            android:text="Search" />
+
+        <Button
+            android:id="@+id/Button02"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="255dp"
+            android:layout_marginTop="3dp"
+            android:text="Clear"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="132dp" />
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
