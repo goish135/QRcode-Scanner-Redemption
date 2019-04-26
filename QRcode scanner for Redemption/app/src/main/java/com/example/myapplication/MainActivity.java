@@ -86,44 +86,44 @@ public class MainActivity extends AppCompatActivity {
 
             public void onClick(View v) {
                 //tvAndroid123.setText(readInfo("a.txt"));
-
-                ymym = (EditText)findViewById(R.id.ymym);
-                String ymym2=ymym.getText().toString();
-                // TODO Auto-generated method stub
-                //String detail = "品名\t\t"+" 數量\t\t"+"單價\n"+ readInfo("a.txt");
-                String dnt = readInfo("a.txt");
-                String ok[] = dnt.split("\n");
-                int ctt = 0;
-                String ans="";
-                int monthcost = 0;
-                for(String okok:ok)
-                {
+                try {
+                    ymym = (EditText) findViewById(R.id.ymym);
+                    String ymym2 = ymym.getText().toString();
+                    // TODO Auto-generated method stub
+                    //String detail = "品名\t\t"+" 數量\t\t"+"單價\n"+ readInfo("a.txt");
+                    String dnt = readInfo("a.txt");
+                    String ok[] = dnt.split("\n");
+                    int ctt = 0;
+                    String ans = "";
+                    int monthcost = 0;
+                    for (String okok : ok) {
 
 
                         //ans+=okok;
-                    String detail[] =okok.split("\t");
-                    if(ymym2.equals(detail[0].substring(0,5)))
-                    {
-                        ans+="日期:"+detail[0]+"\t";
-                        ans+="發票編號:"+detail[1]+"\t";
-                        ans+="總金額:"+detail[2]+"\n";
-                        monthcost += Integer.parseInt(detail[2]);
+                        String detail[] = okok.split("\t");
+                        if (ymym2.equals(detail[0].substring(0, 5))) {
+                            ans += "日期:" + detail[0] + "\t";
+                            ans += "發票編號:" + detail[1] + "\t";
+                            ans += "總金額:" + detail[2] + "\n";
+                            monthcost += Integer.parseInt(detail[2]);
+                        }
+                        ctt++;
                     }
-                    ctt++;
+                    //ans+=ymym2;
+                    if (ymym2.length() == 0) {
+                        tvAndroid123.setText("未輸入查詢條件年月YYYMM");
+                    } else {
+                        if (ans.length() == 0) ans = "No Record!";
+                        else {
+                            ans = "總支出:" + String.valueOf(monthcost) + "\n\n" + ans;
+                        }
+                        tvAndroid123.setText(ans);
+                    }
                 }
-                //ans+=ymym2;
-                if(ymym2.length()==0)
+                catch(Exception e)
                 {
-                    tvAndroid123.setText("未輸入查詢條件年月YYYMM");
+                    tvAndroid123.setText("尚未掃描過!");
                 }
-                else {
-                    if (ans.length() == 0) ans = "No Record!";
-                    else {
-                        ans = "總支出:" + String.valueOf(monthcost) + "\n\n" + ans;
-                    }
-                    tvAndroid123.setText(ans);
-                }
-
             }
 
         });
@@ -519,7 +519,6 @@ public class MainActivity extends AppCompatActivity {
             FileWriter fw = new FileWriter(file.getAbsoluteFile(),true);
             BufferedWriter bw = new BufferedWriter(fw);
             bw.append(strWrite);
-
 
 
             bw.close();
