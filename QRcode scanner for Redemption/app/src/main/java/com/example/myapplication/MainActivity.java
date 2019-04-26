@@ -294,6 +294,7 @@ public class MainActivity extends AppCompatActivity {
                 .setCameraId(0)// 选择摄像头,可使用前置或者后置
                 .setBeepEnabled(true)// 是否开启声音,扫完码之后会"哔"的一声
                 .setBarcodeImageEnabled(true)// 扫完码之后生成二维码的图片
+                .setOrientationLocked(false)
                 .initiateScan();// 初始化扫码
     }
     @Override
