@@ -304,198 +304,178 @@ public class MainActivity extends AppCompatActivity {
             if(result.getContents() == null) {
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
             } else {
-   //             Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
-                String response;
-                String number = result.getContents().substring(2, 10); // 統一發票 8碼
-                String anumber = result.getContents().substring(0, 10); // 統一發票 10碼
-                String day   =  result.getContents().substring(10, 15); // 年月
-
-                String date  = result.getContents().substring(10, 17); // 完整日期
-                String tl = result.getContents().substring(29,37); // 總金額
-                //writeInfo("a.txt",number);
-
-                int j= 1;
-                int sum = 0;
-                for(int i=7;i>=0;i--)
-                {
-                    String temp = tl.substring(i,i+1);
-                    if(temp.equals("a")||temp.equals("A"))
-                    {
-                        temp = "10";
-                    }
-                    if(temp.equals("b")||temp.equals("B"))
-                    {
-                        temp = "11";
-                    }
-                    if(temp.equals("c")||temp.equals("C"))
-                    {
-                        temp = "12";
-                    }
-                    if(temp.equals("d")||temp.equals("D"))
-                    {
-                        temp = "13";
-                    }
-                    if(temp.equals("e")||temp.equals("E"))
-                    {
-                        temp = "14";
-                    }
-                    if(temp.equals("f")||temp.equals("F"))
-                    {
-                        temp = "15";
-                    }
-                    int intvalue = Integer.valueOf(temp);
-                    sum += (intvalue*j);
-                    j*=16;
-                }
-                String  sumsum = String.valueOf(sum);
-                response = date+"\t"+anumber+"\t"+sumsum+"\n";
-
-                int flag = 1;
-                try {
-                    String repeatCheck = readInfo("a.txt");
-
-                    String line[] = repeatCheck.split("\n");
-
-                    for (String i : line) {
-                        String jj[] = i.split("\t");
-                        if (anumber.equals(jj[1])) {
-                            flag = 0;
-                            break;
-                        }
-                    }
-                }
-                catch(Exception e)
-                {
-                    // do nothing
-                }
-                if(flag==1)
-                    writeInfo("a.txt",response);
-
-                //Toast.makeText(this, "Load: " + tl, Toast.LENGTH_LONG).show();
-
                 String context = null;
-                int jud=0;
-                int range=0;
-                try {
-                    context = check(number);
-                    String[] ct2 = context.split(",|、");
+                if(result.getContents().length()>=77&&result.getContents().substring(0, 2).matches("[A-Z]{2}")&&result.getContents().substring(2, 10).matches("[0-9]{8}")&&result.getContents().substring(10, 15).matches("[0-9]{5}")&&result.getContents().substring(29, 37).matches("[a-zA-Z0-9]{8}")) {
+                    //             Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
+                    //if(result.getContents().length()>=77) {
+                    String response;
+                    String number = result.getContents().substring(2, 10); // 統一發票 8碼
+                    String anumber = result.getContents().substring(0, 10); // 統一發票 10碼
+                    String day = result.getContents().substring(10, 15); // 年月
 
-                    int enter = 0;
-                    jud = 0;
+                    String date = result.getContents().substring(10, 17); // 完整日期
+                    String tl = result.getContents().substring(29, 37); // 總金額
+                    //writeInfo("a.txt",number);
 
-                    //test = day + ","+ ym;
-                    if(day.equals(ym.substring(0,5))||day.equals(ym.substring(5,10))||day.equals(ym.substring(10,15))||day.equals(ym.substring(15,20))) {
-                        if (day.equals(ym.substring(0, 5)) || day.equals(ym.substring(5, 10))) {
-                            range = 1;
+                    int j = 1;
+                    int sum = 0;
+                    for (int i = 7; i >= 0; i--) {
+                        String temp = tl.substring(i, i + 1);
+                        if (temp.equals("a") || temp.equals("A")) {
+                            temp = "10";
                         }
-                        else
-                        {
-                            range = 2;
+                        if (temp.equals("b") || temp.equals("B")) {
+                            temp = "11";
                         }
-                        int cnt = 0;
-                        for (String target : ct2) {
-                            if (target.length() == 3) {
-                                if (target.equals(number.substring(5, 8))) {
-                                    context = "增開六獎";
-                                    break;
-                                }
-                                cnt = -1;
+                        if (temp.equals("c") || temp.equals("C")) {
+                            temp = "12";
+                        }
+                        if (temp.equals("d") || temp.equals("D")) {
+                            temp = "13";
+                        }
+                        if (temp.equals("e") || temp.equals("E")) {
+                            temp = "14";
+                        }
+                        if (temp.equals("f") || temp.equals("F")) {
+                            temp = "15";
+                        }
+                        int intvalue = Integer.valueOf(temp);
+                        sum += (intvalue * j);
+                        j *= 16;
+                    }
+                    String sumsum = String.valueOf(sum);
+                    response = date + "\t" + anumber + "\t" + sumsum + "\n";
+                    //}
+                    int flag = 1;
+                    try {
+                        String repeatCheck = readInfo("a.txt");
+
+                        String line[] = repeatCheck.split("\n");
+
+                        for (String i : line) {
+                            String jj[] = i.split("\t");
+                            if (anumber.equals(jj[1])) {
+                                flag = 0;
+                                break;
+                            }
+                        }
+                    } catch (Exception e) {
+                        // do nothing
+                    }
+                    if (flag == 1)
+                        writeInfo("a.txt", response);
+
+                    //Toast.makeText(this, "Load: " + tl, Toast.LENGTH_LONG).show();
+
+
+                    int jud = 0;
+                    int range = 0;
+                    try {
+                        context = check(number);
+                        String[] ct2 = context.split(",|、");
+
+                        int enter = 0;
+                        jud = 0;
+
+                        //test = day + ","+ ym;
+                        if (day.equals(ym.substring(0, 5)) || day.equals(ym.substring(5, 10)) || day.equals(ym.substring(10, 15)) || day.equals(ym.substring(15, 20))) {
+                            if (day.equals(ym.substring(0, 5)) || day.equals(ym.substring(5, 10))) {
+                                range = 1;
                             } else {
-                                if (cnt == 0) {
+                                range = 2;
+                            }
+                            int cnt = 0;
+                            for (String target : ct2) {
+                                if (target.length() == 3) {
+                                    if (target.equals(number.substring(5, 8))) {
+                                        context = "增開六獎";
+                                        break;
+                                    }
+                                    cnt = -1;
+                                } else {
+                                    if (cnt == 0) {
 
-                                    if (enter == 0 && range == 1) {
-                                        jud = 1;
-                                    }
-                                    else if (enter == 1 && range == 2) {
-                                        jud = 1;
-                                    }
-                                    enter++;
-                                    //     context = target + "," + number+','+Integer.toString(enter) ;
-                                    if (target.equals(number)&&jud==1) {
-                                        context = "特別獎";
-                                        break;
-                                    }
-                                } else if (cnt == 1) {
-                                    if (target.equals(number)&&jud == 1) {
-                                        context = "特獎";
-                                        break;
-                                    }
-                                } else if (cnt == 2 || cnt == 3 || cnt == 4) {
-                                    if (target.equals(number)&&jud == 1) {
-                                        context = "頭獎";
-                                        break;
-                                    } else if (target.substring(1, 8).equals(number.substring(1, 8))&&jud == 1) {
-                                        context = "二獎";
-                                        break;
-                                    } else if (target.substring(2, 8).equals(number.substring(2, 8))&&jud == 1) {
-                                        context = "三獎";
-                                        break;
-                                    } else if (target.substring(3, 8).equals(number.substring(3, 8))&&jud == 1) {
-                                        context = "四獎";
-                                        break;
-                                    } else if (target.substring(4, 8).equals(number.substring(4, 8))&&jud == 1) {
-                                        context = "五獎";
-                                        break;
-                                    } else if (target.substring(5, 8).equals(number.substring(5, 8))&&jud == 1) {
-                                        context = "六獎";
-                                        break;
-                                    }
-                                    else {
-                                        if(jud == 1)
-                                            context = "未中獎";
+                                        if (enter == 0 && range == 1) {
+                                            jud = 1;
+                                        } else if (enter == 1 && range == 2) {
+                                            jud = 1;
+                                        }
+                                        enter++;
+                                        //     context = target + "," + number+','+Integer.toString(enter) ;
+                                        if (target.equals(number) && jud == 1) {
+                                            context = "特別獎";
+                                            break;
+                                        }
+                                    } else if (cnt == 1) {
+                                        if (target.equals(number) && jud == 1) {
+                                            context = "特獎";
+                                            break;
+                                        }
+                                    } else if (cnt == 2 || cnt == 3 || cnt == 4) {
+                                        if (target.equals(number) && jud == 1) {
+                                            context = "頭獎";
+                                            break;
+                                        } else if (target.substring(1, 8).equals(number.substring(1, 8)) && jud == 1) {
+                                            context = "二獎";
+                                            break;
+                                        } else if (target.substring(2, 8).equals(number.substring(2, 8)) && jud == 1) {
+                                            context = "三獎";
+                                            break;
+                                        } else if (target.substring(3, 8).equals(number.substring(3, 8)) && jud == 1) {
+                                            context = "四獎";
+                                            break;
+                                        } else if (target.substring(4, 8).equals(number.substring(4, 8)) && jud == 1) {
+                                            context = "五獎";
+                                            break;
+                                        } else if (target.substring(5, 8).equals(number.substring(5, 8)) && jud == 1) {
+                                            context = "六獎";
+                                            break;
+                                        } else {
+                                            if (jud == 1)
+                                                context = "未中獎";
+                                        }
                                     }
                                 }
-                            }
 
-                            cnt++;
-                        }
-                    }
-                    else
-                    {
-                        if(day.substring(0,3).equals(ym.substring(5,8)))
-                        {
-                            if(Integer.valueOf(day.substring(3,5))>Integer.valueOf(ym.substring(8,10)))
-                            {
+                                cnt++;
+                            }
+                        } else {
+                            if (day.substring(0, 3).equals(ym.substring(5, 8))) {
+                                if (Integer.valueOf(day.substring(3, 5)) > Integer.valueOf(ym.substring(8, 10))) {
+                                    context = "媽祖叫你別急，兌獎時間還沒到!";
+                                }
+
+                            } else if (Integer.valueOf(day.substring(0, 3)) > Integer.valueOf(ym.substring(5, 8))) {
                                 context = "媽祖叫你別急，兌獎時間還沒到!";
-                            }
-
-                        }
-                        else if(Integer.valueOf(day.substring(0,3))>Integer.valueOf(ym.substring(5,8)))
-                        {
-                            context = "媽祖叫你別急，兌獎時間還沒到!";
-                        }
-                        else if(Integer.valueOf(day.substring(0,3))<Integer.valueOf(ym.substring(10,13)))
-                        {
-                            context = "過期啦QQ";
-                        }
-                        else if(Integer.valueOf(day.substring(0,3))==Integer.valueOf(ym.substring(10,13)))
-                        {
-                            if(Integer.valueOf(day.substring(3,5))<Integer.valueOf(ym.substring(13,15)))
-                            {
+                            } else if (Integer.valueOf(day.substring(0, 3)) < Integer.valueOf(ym.substring(10, 13))) {
                                 context = "過期啦QQ";
+                            } else if (Integer.valueOf(day.substring(0, 3)) == Integer.valueOf(ym.substring(10, 13))) {
+                                if (Integer.valueOf(day.substring(3, 5)) < Integer.valueOf(ym.substring(13, 15))) {
+                                    context = "過期啦QQ";
+                                }
                             }
+                            // context = "未在兌獎期限內";
                         }
-                        // context = "未在兌獎期限內";
+
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
 
+                    if (range == 1)
+                        context = ym.substring(0, 3) + '年' + ym.substring(3, 5) + '-' + ym.substring(8, 10) + '月' + ' ' + context;
+                    if (range == 2)
+                        context = ym.substring(10, 13) + '年' + ym.substring(13, 15) + '-' + ym.substring(18, 20) + '月' + ' ' + context;
 
-
-                }catch (IOException e) {
-                    e.printStackTrace();
+                    if (flag == 0) {
+                        context = "重複掃描~~~\n" + context;
+                    }
                 }
-
-                if(range==1)
-                    context=ym.substring(0,3)+'年'+ym.substring(3,5)+'-'+ym.substring(8,10)+'月'+' '+context;
-                if(range==2)
-                    context=ym.substring(10,13)+'年'+ym.substring(13,15)+'-'+ym.substring(18,20)+'月'+' '+context;
-
-                if(flag==0)
+                else
                 {
-                    context = "重複掃描~~~\n"+ context ;
+                    context ="非發票格式，請對準電子發票的左方QRcode";
                 }
 
-
-                //writeInfo("a.txt",tl);
                 AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
                 dialog.setTitle("Result:");
                 dialog.setMessage( context);
