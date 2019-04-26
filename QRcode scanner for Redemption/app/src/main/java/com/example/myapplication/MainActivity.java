@@ -290,9 +290,9 @@ public class MainActivity extends AppCompatActivity {
     {
         new IntentIntegrator(this)
                 .setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES)// 扫码的类型,可选：一维码，二维码，一/二维码
-                .setPrompt("请对准二维码")// 设置提示语
+                .setPrompt("請對準二維碼")// 设置提示语
                 .setCameraId(0)// 选择摄像头,可使用前置或者后置
-                .setBeepEnabled(false)// 是否开启声音,扫完码之后会"哔"的一声
+                .setBeepEnabled(true)// 是否开启声音,扫完码之后会"哔"的一声
                 .setBarcodeImageEnabled(true)// 扫完码之后生成二维码的图片
                 .initiateScan();// 初始化扫码
     }
@@ -349,23 +349,25 @@ public class MainActivity extends AppCompatActivity {
                 String  sumsum = String.valueOf(sum);
                 response = date+"\t"+anumber+"\t"+sumsum+"\n";
 
-
-                /*
-                String repeatCheck =readInfo("a.txt");
-
-                String line[] = repeatCheck.split("\n");
                 int flag = 1;
-                for(String i : line)
-                {
-                    String jj[]=i.split("\t");
-                    if(anumber.equals(jj[1]))
-                    {
-                        flag = 0;
-                        break;
+                try {
+                    String repeatCheck = readInfo("a.txt");
+
+                    String line[] = repeatCheck.split("\n");
+
+                    for (String i : line) {
+                        String jj[] = i.split("\t");
+                        if (anumber.equals(jj[1])) {
+                            flag = 0;
+                            break;
+                        }
                     }
                 }
-                */
-                //if(flag==1)
+                catch(Exception e)
+                {
+                    // do nothing
+                }
+                if(flag==1)
                     writeInfo("a.txt",response);
 
                 //Toast.makeText(this, "Load: " + tl, Toast.LENGTH_LONG).show();
@@ -485,12 +487,12 @@ public class MainActivity extends AppCompatActivity {
                     context=ym.substring(0,3)+'年'+ym.substring(3,5)+'-'+ym.substring(8,10)+'月'+' '+context;
                 if(range==2)
                     context=ym.substring(10,13)+'年'+ym.substring(13,15)+'-'+ym.substring(18,20)+'月'+' '+context;
-                /*
+
                 if(flag==0)
                 {
                     context = "重複掃描~~~\n"+ context ;
                 }
-                */
+
 
                 //writeInfo("a.txt",tl);
                 AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
