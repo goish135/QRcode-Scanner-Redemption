@@ -1,0 +1,7 @@
+#Internal package file, do not edit.
+#Fri Apr 26 11:51:50 GMT+08:00 2019
+0.baseType=DIRECTORY
+0.base=D\:\\Andriod\\okok\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out
+0.path=classes.dex
+0.set=DEX
+count=1

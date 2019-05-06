@@ -1,0 +1,4 @@
+#Sat Apr 27 02:08:32 GMT+08:00 2019
+base.0=D\:\\Andriod\\okok\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out
+path.0=classes.dex
+renamed.0=classes.dex
