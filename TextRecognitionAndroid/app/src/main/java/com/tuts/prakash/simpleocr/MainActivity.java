@@ -52,99 +52,114 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("手指接觸螢幕的座標: ","("+x+"',"+y+")");
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 String[] tokens = target.split("\\r?\\n");
+
+                int has = 0;
                 for(String token:tokens){
                     Log.i("token",token);
-                    if(token.matches("[A-Z]{2}-[0-9]{8}"))
-                        target = token;
+                    if(token.matches("[A-Z]{2}-[0-9]{8}")) {
+                        targetv = token;
+                        has = 1;
+                    }
                 }
-                builder.setMessage("是不是這串發票號碼?"+target);
-                targetv =  target;
+                if(has==1) {
+                    builder.setMessage("是不是這串發票號碼?" + targetv);
+                }else{
+                    builder.setMessage("找不到發票格式!");
+                }
 
-                builder.setPositiveButton("沒錯", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        String str = "12345678";
+                //targetv =  target;
+                if(has==1) {
+                    builder.setPositiveButton("沒錯", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            String str = "12345678";
 
-                        try {
-                            String rv = check(str);
-                            String context="";
-                            int cnt=0;
-                            int jud = 0;
+                            try {
+                                String rv = check(str);
+                                String context = "";
+                                int cnt = 0;
+                                int jud = 0;
 
-                            Log.i("ican",targetv);
-                            Log.i("ican",targetv);
+                                Log.i("ican", targetv);
+                                Log.i("ican", targetv);
 
-                            //
-                            String[] ct2 = rv.split(",|、");
-                            String sr = targetv.substring(3,11);
-                            for (String item : ct2) {
-                                if (item.length() == 3) {
-                                    if (item.equals(sr.substring(5, 8))) {
-                                        context = "增開六獎";
-                                        // break;
-                                        jud = 1;
+                                //
+                                String[] ct2 = rv.split(",|、");
+                                String sr = targetv.substring(3, 11);
+                                for (String item : ct2) {
+                                    if (item.length() == 3) {
+                                        if (item.equals(sr.substring(5, 8))) {
+                                            context = "增開六獎";
+                                            // break;
+                                            jud = 1;
+                                        }
+                                        //cnt = -1;
+                                    } else {
+                                        if (cnt == 0) {
+
+
+                                            if (item.equals(sr)) {
+                                                context = "特別獎";
+                                                break;
+                                            }
+                                        } else if (cnt == 1) {
+                                            if (item.equals(sr)) {
+                                                context = "特獎";
+                                                break;
+                                            }
+                                        } else if (cnt == 2 || cnt == 3 || cnt == 4) {
+                                            if (item.equals(sr) && jud == 1) {
+                                                context = "頭獎";
+                                                break;
+                                            } else if (item.substring(1, 8).equals(sr.substring(1, 8))) {
+                                                context = "二獎";
+                                                break;
+                                            } else if (item.substring(2, 8).equals(sr.substring(2, 8))) {
+                                                context = "三獎";
+                                                break;
+                                            } else if (item.substring(3, 8).equals(sr.substring(3, 8))) {
+                                                context = "四獎";
+                                                break;
+                                            } else if (item.substring(4, 8).equals(sr.substring(4, 8))) {
+                                                context = "五獎";
+                                                break;
+                                            } else if (item.substring(5, 8).equals(sr.substring(5, 8))) {
+                                                context = "六獎";
+                                                break;
+                                            } else {
+                                                if (jud == 0)
+                                                    context = "未中獎";
+                                            }
+                                        }
                                     }
-                                    //cnt = -1;
-                                } else {
-                                    if (cnt == 0) {
 
-
-                                        if (item.equals(sr) ) {
-                                            context = "特別獎";
-                                            break;
-                                        }
-                                    } else if (cnt == 1) {
-                                        if (item.equals(sr) ) {
-                                            context = "特獎";
-                                            break;
-                                        }
-                                    } else if (cnt == 2 || cnt == 3 || cnt == 4) {
-                                        if (item.equals(sr) && jud == 1) {
-                                            context = "頭獎";
-                                            break;
-                                        } else if (item.substring(1, 8).equals(sr.substring(1, 8)) ) {
-                                            context = "二獎";
-                                            break;
-                                        } else if (item.substring(2, 8).equals(sr.substring(2, 8)) ) {
-                                            context = "三獎";
-                                            break;
-                                        } else if (item.substring(3, 8).equals(sr.substring(3, 8)) ) {
-                                            context = "四獎";
-                                            break;
-                                        } else if (item.substring(4, 8).equals(sr.substring(4, 8)) ) {
-                                            context = "五獎";
-                                            break;
-                                        } else if (item.substring(5, 8).equals(sr.substring(5, 8)) ) {
-                                            context = "六獎";
-                                            break;
-                                        } else {
-                                            if (jud == 0)
-                                                context = "未中獎";
-                                        }
-                                    }
+                                    cnt++;
                                 }
-
-                                cnt++;
+                                //
+                                AlertDialog.Builder dialog2 = new AlertDialog.Builder(MainActivity.this);
+                                dialog2.setTitle("Result:");
+                                dialog2.setMessage(context);
+                                dialog2.show();
+                            } catch (IOException e) {
+                                e.printStackTrace();
                             }
-                            //
-                            AlertDialog.Builder dialog2 = new AlertDialog.Builder(MainActivity.this);
-                            dialog2.setTitle("Result:");
-                            dialog2.setMessage(context);
-                            dialog2.show();
-                        }catch(IOException e)
-                        {
-                            e.printStackTrace();
-                        }
 
-                        //Intent intent = new Intent();
-                        //intent.setClass(MainActivity.this  , Page2.class);
-                        //startActivity(intent);
-                    }
-                });
-                builder.setNegativeButton("不是", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int id) {
-                    }
-                });
+                            Intent intent = new Intent();
+                            intent.setClass(MainActivity.this  , Page2.class);
+                            startActivity(intent);
+                        }
+                    });
+                    builder.setNegativeButton("不是", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int id) {
+                        }
+                    });
+                } else{
+                    builder.setNegativeButton("返回", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int id) {
+                        }
+                    });
+                }
                 AlertDialog dialog = builder.create();
                 dialog.show();
                 // Log.i("result",target);
