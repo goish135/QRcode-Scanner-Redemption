@@ -51,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
                 lastY = y;
                 Log.e("手指接觸螢幕的座標: ","("+x+"',"+y+")");
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+
+
                 String[] tokens = target.split("\\r?\\n");
 
                 int has = 0;
@@ -135,17 +137,52 @@ public class MainActivity extends AppCompatActivity {
                                     cnt++;
                                 }
                                 //
+                                /*
                                 AlertDialog.Builder dialog2 = new AlertDialog.Builder(MainActivity.this);
                                 dialog2.setTitle("Result:");
                                 dialog2.setMessage(context);
                                 dialog2.show();
+                                */
+
+                                AlertDialog.Builder builder2 = new AlertDialog.Builder(MainActivity.this);
+                                builder2.setMessage("命運的決擇");
+
+                                builder2.setPositiveButton("繼續尋找100萬", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int id) {
+
+                                    }
+                                });
+                                builder2.setNegativeButton("休息一下,等等繼續", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int id) {
+                                        Intent intent = new Intent();
+                                        intent.setClass(MainActivity.this  , Page2.class);
+                                        startActivity(intent);
+                                    }
+                                });
+                                /*
+                                builder2.setPositiveButton("休息一下等等繼續", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int id) {
+                                        Intent intent = new Intent();
+                                        intent.setClass(MainActivity.this  , Page2.class);
+                                        startActivity(intent);
+                                    }
+                                });
+
+                                 */
+                                AlertDialog dialog2 = builder2.create();
+                                dialog2.show();
+
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
-
+                            /*
                             Intent intent = new Intent();
                             intent.setClass(MainActivity.this  , Page2.class);
                             startActivity(intent);
+                             */
                         }
                     });
                     builder.setNegativeButton("不是", new DialogInterface.OnClickListener() {
