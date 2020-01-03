@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -42,7 +43,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    private ImageView img;
     private Button button01;
     private Button button02;
     private Button button03;
@@ -61,7 +62,8 @@ public class MainActivity extends AppCompatActivity {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
-
+        img = (ImageView)findViewById(R.id.imageView1);
+        img.setVisibility(View.INVISIBLE);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -74,6 +76,22 @@ public class MainActivity extends AppCompatActivity {
                 GoScan();
             }
         });
+
+        FloatingActionButton fab2 = findViewById(R.id.fab2);
+        fab2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /*
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                GoScan();
+                 */
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this  , Page2.class);
+                startActivity(intent);
+            }
+        });
+
         button01 = (Button)findViewById(R.id.Button01);
 
 
@@ -97,6 +115,18 @@ public class MainActivity extends AppCompatActivity {
                     int ctt = 0;
                     String ans = "";
                     int monthcost = 0;
+                    int flag = 0;
+                    if(ymym2.equals("M083040017"))
+                    {
+                        //tvAndroid123.setText("成功解鎖小彩蛋");
+                        img.setVisibility(View.VISIBLE);
+                        flag = 1;
+                    }
+                    if(ymym2.equals("beautygirl"))
+                    {
+                        img.setVisibility(View.INVISIBLE);
+                        flag = 2;
+                    }
                     for (String okok : ok) {
 
 
@@ -114,7 +144,13 @@ public class MainActivity extends AppCompatActivity {
                     if (ymym2.length() == 0) {
                         tvAndroid123.setText("未輸入查詢條件年月YYYMM");
                     } else {
-                        if (ans.length() == 0) ans = "No Record!";
+                        if (ans.length() == 0 && flag==0) ans = "No Record!";
+                        else if(flag==1) {
+                            ans = "成功解鎖小彩蛋!";
+                        }
+                        else if(flag==2){
+                            ans = "Thanks!";
+                        }
                         else {
                             ans = "總支出:" + String.valueOf(monthcost) + "\n\n" + ans;
                         }
@@ -138,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
                 // TODO Auto-generated method stub
 
                 tvAndroid123.setText("");
-
+                img.setVisibility(View.INVISIBLE);
             }
 
         });

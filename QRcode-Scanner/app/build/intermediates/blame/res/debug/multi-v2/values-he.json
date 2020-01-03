@@ -4,7 +4,7 @@
             "outputFile": "D:\\QRcode-Scanner\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-he\\values-he.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\品瑜\\.gradle\\caches\\transforms-2\\files-2.1\\a61bb99b07c614d75d5814d84a905ae5\\res\\values-he\\values-he.xml",
+                    "source": "C:\\Users\\品瑜\\.gradle\\caches\\transforms-2\\files-2.1\\e476518a6675a07bb1a3a4989d251867\\zxing-android-embedded-3.5.0\\res\\values-he\\values-he.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",

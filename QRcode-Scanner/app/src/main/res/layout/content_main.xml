@@ -42,13 +42,13 @@
         </EditText>
         <EditText
             android:id="@+id/ymym"
-            android:inputType="phone"
+            android:inputType="text"
             android:layout_width="252dp"
             android:layout_height="71dp"
             android:layout_weight="0"
             android:ems="2"
             android:hint="查詢年月 ex:10804"
-            android:maxLength="5"
+            android:maxLength="10"
             android:layout_marginTop="50dp"
             android:singleLine="true">
         </EditText>
@@ -69,6 +69,15 @@
             android:layout_marginTop="30dp"
             android:text=""
             tools:ignore="MissingConstraints" />
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:maxHeight="100dp"
+            android:maxWidth="100dp"
+            android:src="@drawable/goish135" />
 
     </LinearLayout>
 
