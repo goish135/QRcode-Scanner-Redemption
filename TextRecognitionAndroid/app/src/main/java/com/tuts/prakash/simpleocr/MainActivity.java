@@ -4,23 +4,29 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.TextView;
+
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
 
 import java.io.IOException;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     private static final int requestPermissionID = 101;
-
+    public String ym;
 
     @Override
     public boolean onTouchEvent(MotionEvent event){
@@ -55,9 +61,21 @@ public class MainActivity extends AppCompatActivity {
 
                 builder.setPositiveButton("沒錯", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        Intent intent = new Intent();
-                        intent.setClass(MainActivity.this  , Page2.class);
-                        startActivity(intent);
+                        String str = "12345678";
+                        try {
+                            String rv = check(str);
+                            AlertDialog.Builder dialog2 = new AlertDialog.Builder(MainActivity.this);
+                            dialog2.setTitle("Result:");
+                            dialog2.setMessage(rv);
+                            dialog2.show();
+                        }catch(IOException e)
+                        {
+                            e.printStackTrace();
+                        }
+
+                        //Intent intent = new Intent();
+                        //intent.setClass(MainActivity.this  , Page2.class);
+                        //startActivity(intent);
                     }
                 });
                 builder.setNegativeButton("不是", new DialogInterface.OnClickListener() {
@@ -85,17 +103,50 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
         mCameraView = findViewById(R.id.surfaceView);
         mTextView = findViewById(R.id.text_view);
 
         startCameraSource();
     }
+    public String check(String number) throws IOException {
+        try {
 
+            Document doc = Jsoup.connect("http://invoice.etax.nat.gov.tw/").get();
+
+            Elements ele = doc.select("span[class=t18Red]");
+            Elements ele2 = doc.select("h2");
+            String str ="";
+            for(Element a:ele )
+            {
+                str += (a.text()+",");
+            }
+
+
+            //String ym="";
+            ym = "";
+            for(Element b:ele2)
+            {
+                if((b.text().substring(0,1).equals("0")||b.text().substring(0,1).equals("1")||b.text().substring(0,1).equals("2")))
+                    ym += b.text().substring(0,3)+b.text().substring(4,6)+b.text().substring(0,3)+b.text().substring(7,9);
+
+            }
+            Log.i("check",str);
+            return  str;
+        }catch(Exception e) {
+            //Log.i("mytag", e.toString());
+            Log.i("what",e.toString());
+            return e.toString();
+        }
+    }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode != requestPermissionID) {
@@ -204,5 +255,6 @@ public class MainActivity extends AppCompatActivity {
             });
         }
     }
+
 
 }
