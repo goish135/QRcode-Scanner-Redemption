@@ -2,6 +2,7 @@ package com.tuts.prakash.simpleocr;
 
 import android.Manifest;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -54,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
 
                 builder.setPositiveButton("沒錯", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        Intent intent = new Intent();
+                        intent.setClass(MainActivity.this  , Page2.class);
+                        startActivity(intent);
                     }
                 });
                 builder.setNegativeButton("不是", new DialogInterface.OnClickListener() {
