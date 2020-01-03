@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
                                 */
 
                                 AlertDialog.Builder builder2 = new AlertDialog.Builder(MainActivity.this);
-                                builder2.setMessage("命運的決擇");
+                                builder2.setMessage(context);
 
                                 builder2.setPositiveButton("繼續尋找100萬", new DialogInterface.OnClickListener() {
                                     @Override
