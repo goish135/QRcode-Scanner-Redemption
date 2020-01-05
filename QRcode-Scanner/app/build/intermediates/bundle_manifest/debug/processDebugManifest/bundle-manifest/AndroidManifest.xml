@@ -44,6 +44,15 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
+        <receiver
+            android:name="com.example.myapplication.AlarmReceiver"
+            android:enabled="true"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="activity_app" />
+            </intent-filter>
+        </receiver>
+
         <activity android:name="com.example.myapplication.Page2" />
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"

@@ -1,5 +1,8 @@
 package com.example.myapplication;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.Manifest;
@@ -25,6 +28,9 @@ import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -68,7 +74,7 @@ public class Page2 extends AppCompatActivity {
                 int has = 0;
                 for(String token:tokens){
                     Log.i("token",token);
-                    if(token.matches("[A-Z]{2}-[0-9]{8}")) {
+                    if(token.matches("[A-Z]{2}-[0-9]{8}")|| token.matches("[A-Z]{2}\\s[0-9]{8}") ) {
                         targetv = token;
                         has = 1;
                     }
@@ -157,7 +163,7 @@ public class Page2 extends AppCompatActivity {
                                 AlertDialog.Builder builder2 = new AlertDialog.Builder(Page2.this);
                                 builder2.setMessage(context);
 
-                                builder2.setPositiveButton("繼續尋找100萬", new DialogInterface.OnClickListener() {
+                                builder2.setPositiveButton("繼續尋找1000萬", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int id) {
 
@@ -238,9 +244,39 @@ public class Page2 extends AppCompatActivity {
         }
         mCameraView = findViewById(R.id.surfaceView);
         mTextView = findViewById(R.id.text_view);
-
+        /*
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(2020,1,5,15,40);
+        Intent intent = new Intent();
+        intent.setClass(this,AlarmReceiver.class);
+        PendingIntent pending = PendingIntent.getBroadcast(this, 0, intent, 0);
+        AlarmManager alarm = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
+        alarm.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pending);
+        */
+        //start();
         startCameraSource();
     }
+    /*
+    public void start() {
+        AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Date dat = new Date();
+        Calendar cal_alarm = Calendar.getInstance();
+        Calendar cal_now = Calendar.getInstance();
+        cal_now.setTime(dat);
+        cal_alarm.setTime(dat);
+        cal_alarm.set(Calendar.HOUR_OF_DAY,16);
+        cal_alarm.set(Calendar.MINUTE,48);
+        cal_alarm.set(Calendar.SECOND,0);
+        if(cal_alarm.before(cal_now)){
+            cal_alarm.add(Calendar.DATE,1);
+        }
+
+        Intent myIntent = new Intent(this, AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, myIntent, 0);
+
+        manager.set(AlarmManager.RTC_WAKEUP,cal_alarm.getTimeInMillis(), pendingIntent);
+    }
+    */
     public String check(String number) throws IOException {
         try {
 

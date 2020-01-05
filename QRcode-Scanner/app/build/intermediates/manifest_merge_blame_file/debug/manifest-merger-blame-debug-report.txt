@@ -11,14 +11,14 @@
 9-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml
 10
 11    <uses-permission android:name="android.permission.CAMERA" />
-11-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:5:5-65
-11-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:5:22-62
+11-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:6:5-65
+11-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:6:22-62
 12    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-12-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:6:5-81
-12-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:6:22-78
+12-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:7:5-81
+12-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:7:22-78
 13    <uses-permission android:name="android.permission.INTERNET" />
-13-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:7:5-67
-13-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:7:22-64
+13-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:8:5-67
+13-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:8:22-64
 14
 15    <!-- Don't require camera, as this requires a rear camera. This allows it to work on the Nexus 7 -->
 16    <uses-feature
@@ -60,76 +60,92 @@
 34-->[com.journeyapps:zxing-android-embedded:3.5.0] C:\Users\品瑜\.gradle\caches\transforms-2\files-2.1\e476518a6675a07bb1a3a4989d251867\zxing-android-embedded-3.5.0\AndroidManifest.xml:43:9-33
 35
 36    <application
-36-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:9:5-32:19
+36-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:10:5-42:19
 37        android:allowBackup="true"
-37-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:10:9-35
+37-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:11:9-35
 38        android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
 38-->[com.android.support:support-compat:28.0.0] C:\Users\品瑜\.gradle\caches\transforms-2\files-2.1\b73d0db3c489aeab8b531c92b0313ef9\support-compat-28.0.0\AndroidManifest.xml:22:18-91
 39        android:debuggable="true"
 40        android:icon="@mipmap/ic_launcher"
-40-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:11:9-43
+40-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:12:9-43
 41        android:label="@string/app_name"
-41-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:12:9-41
+41-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:13:9-41
 42        android:networkSecurityConfig="@xml/network_security_config"
-42-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:13:9-69
+42-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:14:9-69
 43        android:roundIcon="@mipmap/ic_launcher_round"
-43-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:14:9-54
+43-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:15:9-54
 44        android:supportsRtl="true"
-44-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:15:9-35
+44-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:16:9-35
 45        android:testOnly="true"
 46        android:theme="@style/AppTheme" >
-46-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:16:9-40
-47        <activity android:name="com.example.myapplication.Page2" />
-47-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:17:9-52
-47-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:17:19-40
-48        <activity
-48-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:18:9-21:49
-49            android:name="com.journeyapps.barcodescanner.CaptureActivity"
-49-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:19:13-74
-50            android:clearTaskOnLaunch="true"
-50-->[com.journeyapps:zxing-android-embedded:3.5.0] C:\Users\品瑜\.gradle\caches\transforms-2\files-2.1\e476518a6675a07bb1a3a4989d251867\zxing-android-embedded-3.5.0\AndroidManifest.xml:48:13-45
-51            android:screenOrientation="fullSensor"
-51-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:20:13-51
-52            android:stateNotNeeded="true"
-52-->[com.journeyapps:zxing-android-embedded:3.5.0] C:\Users\品瑜\.gradle\caches\transforms-2\files-2.1\e476518a6675a07bb1a3a4989d251867\zxing-android-embedded-3.5.0\AndroidManifest.xml:50:13-42
-53            android:theme="@style/zxing_CaptureTheme"
-53-->[com.journeyapps:zxing-android-embedded:3.5.0] C:\Users\品瑜\.gradle\caches\transforms-2\files-2.1\e476518a6675a07bb1a3a4989d251867\zxing-android-embedded-3.5.0\AndroidManifest.xml:51:13-54
-54            android:windowSoftInputMode="stateAlwaysHidden" />
-54-->[com.journeyapps:zxing-android-embedded:3.5.0] C:\Users\品瑜\.gradle\caches\transforms-2\files-2.1\e476518a6675a07bb1a3a4989d251867\zxing-android-embedded-3.5.0\AndroidManifest.xml:52:13-60
-55        <activity
-55-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:22:9-31:20
-56            android:name="com.example.myapplication.MainActivity"
-56-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:23:13-41
-57            android:label="@string/app_name"
-57-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:24:13-45
-58            android:theme="@style/AppTheme.NoActionBar" >
-58-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:25:13-56
-59            <intent-filter>
-59-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:26:13-30:29
-60                <action android:name="android.intent.action.MAIN" />
-60-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:27:17-69
-60-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:27:25-66
-61
-62                <category android:name="android.intent.category.LAUNCHER" />
-62-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:29:17-77
-62-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:29:27-74
-63            </intent-filter>
-64        </activity>
-65        <activity
-65-->[com.google.android.gms:play-services-base:11.0.4] C:\Users\品瑜\.gradle\caches\transforms-2\files-2.1\cfe3387ba7ec1e26dbff829fdc788533\play-services-base-11.0.4\AndroidManifest.xml:19:9-172
-66            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-66-->[com.google.android.gms:play-services-base:11.0.4] C:\Users\品瑜\.gradle\caches\transforms-2\files-2.1\cfe3387ba7ec1e26dbff829fdc788533\play-services-base-11.0.4\AndroidManifest.xml:19:19-85
-67            android:exported="false"
-67-->[com.google.android.gms:play-services-base:11.0.4] C:\Users\品瑜\.gradle\caches\transforms-2\files-2.1\cfe3387ba7ec1e26dbff829fdc788533\play-services-base-11.0.4\AndroidManifest.xml:19:146-170
-68            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-68-->[com.google.android.gms:play-services-base:11.0.4] C:\Users\品瑜\.gradle\caches\transforms-2\files-2.1\cfe3387ba7ec1e26dbff829fdc788533\play-services-base-11.0.4\AndroidManifest.xml:19:86-145
-69
-70        <meta-data
-70-->[com.google.android.gms:play-services-basement:11.0.4] C:\Users\品瑜\.gradle\caches\transforms-2\files-2.1\fa4985925f8a47d96d98f062039fb988\play-services-basement-11.0.4\AndroidManifest.xml:20:9-121
-71            android:name="com.google.android.gms.version"
-71-->[com.google.android.gms:play-services-basement:11.0.4] C:\Users\品瑜\.gradle\caches\transforms-2\files-2.1\fa4985925f8a47d96d98f062039fb988\play-services-basement-11.0.4\AndroidManifest.xml:20:20-65
-72            android:value="@integer/google_play_services_version" />
-72-->[com.google.android.gms:play-services-basement:11.0.4] C:\Users\品瑜\.gradle\caches\transforms-2\files-2.1\fa4985925f8a47d96d98f062039fb988\play-services-basement-11.0.4\AndroidManifest.xml:20:66-119
-73    </application>
-74
-75</manifest>
+46-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:17:9-40
+47        <receiver
+47-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:18:9-25:20
+48            android:name="com.example.myapplication.AlarmReceiver"
+48-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:19:13-42
+49            android:enabled="true"
+49-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:20:13-35
+50            android:exported="true" >
+50-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:21:13-36
+51            <intent-filter>
+51-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:22:13-24:29
+52                <action android:name="activity_app" />
+52-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:23:17-55
+52-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:23:25-52
+53            </intent-filter>
+54        </receiver>
+55
+56        <activity android:name="com.example.myapplication.Page2" />
+56-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:27:9-43
+56-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:27:19-40
+57        <activity
+57-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:28:9-31:49
+58            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+58-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:29:13-74
+59            android:clearTaskOnLaunch="true"
+59-->[com.journeyapps:zxing-android-embedded:3.5.0] C:\Users\品瑜\.gradle\caches\transforms-2\files-2.1\e476518a6675a07bb1a3a4989d251867\zxing-android-embedded-3.5.0\AndroidManifest.xml:48:13-45
+60            android:screenOrientation="fullSensor"
+60-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:30:13-51
+61            android:stateNotNeeded="true"
+61-->[com.journeyapps:zxing-android-embedded:3.5.0] C:\Users\品瑜\.gradle\caches\transforms-2\files-2.1\e476518a6675a07bb1a3a4989d251867\zxing-android-embedded-3.5.0\AndroidManifest.xml:50:13-42
+62            android:theme="@style/zxing_CaptureTheme"
+62-->[com.journeyapps:zxing-android-embedded:3.5.0] C:\Users\品瑜\.gradle\caches\transforms-2\files-2.1\e476518a6675a07bb1a3a4989d251867\zxing-android-embedded-3.5.0\AndroidManifest.xml:51:13-54
+63            android:windowSoftInputMode="stateAlwaysHidden" />
+63-->[com.journeyapps:zxing-android-embedded:3.5.0] C:\Users\品瑜\.gradle\caches\transforms-2\files-2.1\e476518a6675a07bb1a3a4989d251867\zxing-android-embedded-3.5.0\AndroidManifest.xml:52:13-60
+64        <activity
+64-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:32:9-41:20
+65            android:name="com.example.myapplication.MainActivity"
+65-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:33:13-41
+66            android:label="@string/app_name"
+66-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:34:13-45
+67            android:theme="@style/AppTheme.NoActionBar" >
+67-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:35:13-56
+68            <intent-filter>
+68-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:36:13-40:29
+69                <action android:name="android.intent.action.MAIN" />
+69-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:37:17-69
+69-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:37:25-66
+70
+71                <category android:name="android.intent.category.LAUNCHER" />
+71-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:39:17-77
+71-->D:\QRcode-Scanner\app\src\main\AndroidManifest.xml:39:27-74
+72            </intent-filter>
+73        </activity>
+74        <activity
+74-->[com.google.android.gms:play-services-base:11.0.4] C:\Users\品瑜\.gradle\caches\transforms-2\files-2.1\cfe3387ba7ec1e26dbff829fdc788533\play-services-base-11.0.4\AndroidManifest.xml:19:9-172
+75            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+75-->[com.google.android.gms:play-services-base:11.0.4] C:\Users\品瑜\.gradle\caches\transforms-2\files-2.1\cfe3387ba7ec1e26dbff829fdc788533\play-services-base-11.0.4\AndroidManifest.xml:19:19-85
+76            android:exported="false"
+76-->[com.google.android.gms:play-services-base:11.0.4] C:\Users\品瑜\.gradle\caches\transforms-2\files-2.1\cfe3387ba7ec1e26dbff829fdc788533\play-services-base-11.0.4\AndroidManifest.xml:19:146-170
+77            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+77-->[com.google.android.gms:play-services-base:11.0.4] C:\Users\品瑜\.gradle\caches\transforms-2\files-2.1\cfe3387ba7ec1e26dbff829fdc788533\play-services-base-11.0.4\AndroidManifest.xml:19:86-145
+78
+79        <meta-data
+79-->[com.google.android.gms:play-services-basement:11.0.4] C:\Users\品瑜\.gradle\caches\transforms-2\files-2.1\fa4985925f8a47d96d98f062039fb988\play-services-basement-11.0.4\AndroidManifest.xml:20:9-121
+80            android:name="com.google.android.gms.version"
+80-->[com.google.android.gms:play-services-basement:11.0.4] C:\Users\品瑜\.gradle\caches\transforms-2\files-2.1\fa4985925f8a47d96d98f062039fb988\play-services-basement-11.0.4\AndroidManifest.xml:20:20-65
+81            android:value="@integer/google_play_services_version" />
+81-->[com.google.android.gms:play-services-basement:11.0.4] C:\Users\品瑜\.gradle\caches\transforms-2\files-2.1\fa4985925f8a47d96d98f062039fb988\play-services-basement-11.0.4\AndroidManifest.xml:20:66-119
+82    </application>
+83
+84</manifest>
