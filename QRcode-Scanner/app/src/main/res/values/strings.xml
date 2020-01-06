@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">我要中一千萬</string>
     <string name="action_settings">Settings</string>
+    <string name="channel_name">Channel name</string>
+    <string name="channel_description">Channel description</string>
+    <string name="snooze">Snooze</string>
 </resources>

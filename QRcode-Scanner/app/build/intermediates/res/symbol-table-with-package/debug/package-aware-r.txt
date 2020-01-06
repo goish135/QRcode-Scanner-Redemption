@@ -1443,6 +1443,8 @@ string action_settings
 string app_name
 string appbar_scrolling_view_behavior
 string bottom_sheet_behavior
+string channel_description
+string channel_name
 string character_counter_content_description
 string character_counter_pattern
 string common_google_play_services_enable_button
@@ -1472,6 +1474,7 @@ string path_password_eye_mask_strike_through
 string path_password_eye_mask_visible
 string path_password_strike_through
 string search_menu_title
+string snooze
 string status_bar_notification_info_overflow
 string zxing_app_name
 string zxing_button_ok

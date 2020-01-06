@@ -253,10 +253,10 @@ public class Page2 extends AppCompatActivity {
         AlarmManager alarm = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
         alarm.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pending);
         */
-        //start();
+        start();
         startCameraSource();
     }
-    /*
+
     public void start() {
         AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Date dat = new Date();
@@ -264,8 +264,8 @@ public class Page2 extends AppCompatActivity {
         Calendar cal_now = Calendar.getInstance();
         cal_now.setTime(dat);
         cal_alarm.setTime(dat);
-        cal_alarm.set(Calendar.HOUR_OF_DAY,16);
-        cal_alarm.set(Calendar.MINUTE,48);
+        cal_alarm.set(Calendar.HOUR_OF_DAY,20);
+        cal_alarm.set(Calendar.MINUTE,32);
         cal_alarm.set(Calendar.SECOND,0);
         if(cal_alarm.before(cal_now)){
             cal_alarm.add(Calendar.DATE,1);
@@ -276,7 +276,7 @@ public class Page2 extends AppCompatActivity {
 
         manager.set(AlarmManager.RTC_WAKEUP,cal_alarm.getTimeInMillis(), pendingIntent);
     }
-    */
+
     public String check(String number) throws IOException {
         try {
 

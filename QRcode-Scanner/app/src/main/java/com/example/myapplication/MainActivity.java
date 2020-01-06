@@ -1,14 +1,21 @@
 package com.example.myapplication;
 
 import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -45,6 +52,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import static com.example.myapplication.AlarmReceiver.ACTION_SNOOZE;
+import static com.example.myapplication.AlarmReceiver.EXTRA_NOTIFICATION_ID;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -59,11 +70,21 @@ public class MainActivity extends AppCompatActivity {
     private EditText ymym;
     public String ym;
     final String url=  "https://www.cnblogs.com/qdhxhz/p/9230805.html";
+
+    private static final String CHANNEL_ID = "CHANNEL_ID";
+    private static final String TAG = "main";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        createNotificationChannel();
+
+        Log.e(TAG, "onCreate");
+
+        LongOperation lo = new LongOperation(this);
+        lo.execute("Test 1", "Test 2", "Test 3");
 
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -327,7 +348,103 @@ public class MainActivity extends AppCompatActivity {
 
         });
         start();
+        //addNotification();
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.drawable.goish135)
+                .setContentTitle("textTitle")
+                .setContentText("textContent")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+        notificationManager.notify(0, builder.build());
+    }
+        //
+        private class LongOperation extends AsyncTask<String, String, String> {
+
+            private static final String TAG = "longoperation";
+            private Context ctx;
+            private AtomicInteger notificationId = new AtomicInteger(0);
+
+            LongOperation(Context ctx) {
+                this.ctx = ctx;
+            }
+
+            @Override
+            protected String doInBackground(String... params) {
+                for (String s : params) {
+                    Log.e(TAG, s);
+
+                    publishProgress(s);
+
+                    for (int i = 0; i < 5; i++) {
+                        try {
+                            Thread.sleep(200);
+                        } catch (InterruptedException e) {
+                            Thread.interrupted();
+                        }
+                    }
+                }
+                return "Executed";
+            }
+
+            @Override
+            protected void onProgressUpdate(String... values) {
+                for (String title: values) {
+                    sendNotification(title, notificationId.incrementAndGet());
+                }
+            }
+
+            void sendNotification(String title, int notificationId) {
+
+                // Create an explicit intent for an Activity in your app
+        /* Intent intent = new Intent(ctx, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(ctx, 0, intent, 0); */
+
+                Intent snoozeIntent = new Intent(ctx, AlarmReceiver.class);
+                snoozeIntent.setAction(ACTION_SNOOZE);
+                snoozeIntent.putExtra(EXTRA_NOTIFICATION_ID, notificationId);
+
+                Log.e(TAG, snoozeIntent.getExtras().toString());
+
+                Log.e(TAG, "snoozeIntent id: " + snoozeIntent.getIntExtra(EXTRA_NOTIFICATION_ID, -1));
+
+                PendingIntent snoozePendingIntent =
+                        PendingIntent.getBroadcast(ctx, notificationId, snoozeIntent, 0);
+
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(ctx, CHANNEL_ID)
+                        .setSmallIcon(R.drawable.ic_launcher_background)
+                        .setContentTitle(String.format("%s (id %d)", title, notificationId))
+                        .setContentText("Much longer text that cannot fit one line...")
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                        .setAutoCancel(false)
+                        // Add the action button
+                        .addAction(R.drawable.ic_launcher_foreground, ctx.getString(R.string.snooze),
+                                snoozePendingIntent);
+
+                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(ctx);
+
+                // notificationId is a unique int for each notification that you must define
+                notificationManager.notify(notificationId, builder.build());
+            }
         }
+        //
+        //
+        private void createNotificationChannel() {
+            // Create the NotificationChannel, but only on API 26+ because
+            // the NotificationChannel class is new and not in the support library
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                CharSequence name = getString(R.string.channel_name);
+                String description = getString(R.string.channel_description);
+                int importance = NotificationManager.IMPORTANCE_DEFAULT;
+                NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+                channel.setDescription(description);
+                // Register the channel with the system; you can't change the importance
+                // or other notification behaviors after this
+                NotificationManager notificationManager = getSystemService(NotificationManager.class);
+                notificationManager.createNotificationChannel(channel);
+            }
+        }
+        //
 
     public void start() {
         Log.i("gocheck","whats going on");
@@ -337,8 +454,8 @@ public class MainActivity extends AppCompatActivity {
         Calendar cal_now = Calendar.getInstance();
         cal_now.setTime(dat);
         cal_alarm.setTime(dat);
-        cal_alarm.set(Calendar.HOUR_OF_DAY,17);
-        cal_alarm.set(Calendar.MINUTE,38);
+        cal_alarm.set(Calendar.HOUR_OF_DAY,00);
+        cal_alarm.set(Calendar.MINUTE,59);
         cal_alarm.set(Calendar.SECOND,0);
         if(cal_alarm.before(cal_now)){
             cal_alarm.add(Calendar.DATE,1);
@@ -346,8 +463,8 @@ public class MainActivity extends AppCompatActivity {
 
         Intent myIntent = new Intent(this, AlarmReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, myIntent, 0);
-
         manager.set(AlarmManager.RTC_WAKEUP,cal_alarm.getTimeInMillis(), pendingIntent);
+
     }
 
     public void GoScan()
