@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
+import android.os.SystemClock;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.NotificationCompat;
@@ -349,6 +350,7 @@ public class MainActivity extends AppCompatActivity {
         });
         start();
         //addNotification();
+        /*
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.goish135)
                 .setContentTitle("textTitle")
@@ -356,6 +358,7 @@ public class MainActivity extends AppCompatActivity {
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
         notificationManager.notify(0, builder.build());
+         */
     }
         //
         private class LongOperation extends AsyncTask<String, String, String> {
@@ -450,21 +453,28 @@ public class MainActivity extends AppCompatActivity {
         Log.i("gocheck","whats going on");
         AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Date dat = new Date();
+
         Calendar cal_alarm = Calendar.getInstance();
         Calendar cal_now = Calendar.getInstance();
+        Log.i("date","whats going on"+dat);
         cal_now.setTime(dat);
         cal_alarm.setTime(dat);
-        cal_alarm.set(Calendar.HOUR_OF_DAY,00);
-        cal_alarm.set(Calendar.MINUTE,59);
+        cal_alarm.set(Calendar.HOUR_OF_DAY,23);
+        cal_alarm.set(Calendar.MINUTE,58);
         cal_alarm.set(Calendar.SECOND,0);
         if(cal_alarm.before(cal_now)){
             cal_alarm.add(Calendar.DATE,1);
         }
 
-        Intent myIntent = new Intent(this, AlarmReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, myIntent, 0);
-        manager.set(AlarmManager.RTC_WAKEUP,cal_alarm.getTimeInMillis(), pendingIntent);
-
+        for(int i=0;i<3;i++) {
+            cal_alarm.set(Calendar.MINUTE,58+i);
+            Log.i("check times","number"+i);
+            Intent myIntent = new Intent(this, AlarmReceiver.class);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(this, i, myIntent, 0);
+            //manager.set(AlarmManager.RTC_WAKEUP, cal_alarm.getTimeInMillis(), pendingIntent);
+            // SystemClock.elapsedRealtime() + 60000 * i
+            manager.set(AlarmManager.RTC_WAKEUP, cal_alarm.getTimeInMillis(), pendingIntent);
+        }
     }
 
     public void GoScan()

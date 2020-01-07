@@ -10,8 +10,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.Gravity;
 import android.widget.Toast;
+
+import java.util.Date;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
 
@@ -21,11 +24,14 @@ public class AlarmReceiver extends BroadcastReceiver {
     static final String EXTRA_NOTIFICATION_ID = "notification-id";
 
     private static final String TAG = "receiver";
-
+    int i = 0;
     @Override
     public void onReceive(Context context, Intent intent) {
         // Toast.makeText(context, "Good John", Toast.LENGTH_LONG).show();
         Toast toast = Toast.makeText(context,"Good John", Toast.LENGTH_LONG);
+        Date dat = new Date();
+        Log.i("A check times",">>> "+dat);
+        i++;
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
 
