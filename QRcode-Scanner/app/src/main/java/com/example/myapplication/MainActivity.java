@@ -465,16 +465,41 @@ public class MainActivity extends AppCompatActivity {
         Log.i("date","whats going on"+dat);
         cal_now.setTime(dat);
         cal_alarm.setTime(dat);
-        cal_alarm.set(Calendar.HOUR_OF_DAY,15);
-        cal_alarm.set(Calendar.MINUTE,50);
+        cal_alarm.set(Calendar.DAY_OF_MONTH, 25);
+        cal_alarm.set(Calendar.HOUR_OF_DAY,11);
+        cal_alarm.set(Calendar.MINUTE,25);
         cal_alarm.set(Calendar.SECOND,0);
         if(cal_alarm.before(cal_now)){
             cal_alarm.add(Calendar.DATE,1);
         }
 
-        for(int i=0;i<3;i++) {
+        for(int i=0;i<6;i++) {
             //lo.execute("Test 1");
-            cal_alarm.set(Calendar.MINUTE,50+i);
+            //cal_alarm.set(Calendar.MINUTE,22+i);
+            if(i==0)
+            {
+                cal_alarm.set(Calendar.MONTH, 0);
+            }
+            else if(i==1)
+            {
+                cal_alarm.set(Calendar.MONTH, 2);
+            }
+            else if(i==2)
+            {
+                cal_alarm.set(Calendar.MONTH, 4);
+            }
+            else if(i==3)
+            {
+                cal_alarm.set(Calendar.MONTH, 6);
+            }
+            else if(i==4)
+            {
+                cal_alarm.set(Calendar.MONTH, 8);
+            }
+            else if(i==5)
+            {
+                cal_alarm.set(Calendar.MONTH, 10);
+            }
             Log.i("check times","number"+i);
             Intent myIntent = new Intent(this, AlarmReceiver.class);
             PendingIntent pendingIntent = PendingIntent.getBroadcast(this, i, myIntent, 0);

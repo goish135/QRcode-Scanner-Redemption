@@ -64,10 +64,10 @@ public class AlarmReceiver extends BroadcastReceiver {
         // NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_launcher_background)
-                .setContentTitle("My notification")
-                .setContentText("Much longer text that cannot fit one line...")
+                .setContentTitle("開獎提醒")
+                .setContentText("AOS high pass")
                 .setStyle(new NotificationCompat.BigTextStyle()
-                        .bigText("Much longer text that cannot fit one line..."))
+                        .bigText("pinu defined network"))
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
         notificationManager.notify(id , builder.build()) ;
 
