@@ -74,7 +74,8 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String CHANNEL_ID = "CHANNEL_ID";
     private static final String TAG = "main";
-
+    public static final String NOTIFICATION_CHANNEL_ID = "10001" ;
+    //LongOperation lo = new LongOperation(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,9 +85,9 @@ public class MainActivity extends AppCompatActivity {
 
         Log.e(TAG, "onCreate");
 
-        LongOperation lo = new LongOperation(this);
-        lo.execute("Test 1", "Test 2", "Test 3");
-
+         //LongOperation lo = new LongOperation(this);
+         //lo.execute("Test 1", "Test 2", "Test 3");
+         //lo.execute("怎麼合併");
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
@@ -348,7 +349,12 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+        LongOperation lo = new LongOperation(this);
+        //lo.execute("Test 1", "Test 2", "Test 3");
+        lo.execute("怎麼合併");
         start();
+
+
         //addNotification();
         /*
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
@@ -459,15 +465,16 @@ public class MainActivity extends AppCompatActivity {
         Log.i("date","whats going on"+dat);
         cal_now.setTime(dat);
         cal_alarm.setTime(dat);
-        cal_alarm.set(Calendar.HOUR_OF_DAY,23);
-        cal_alarm.set(Calendar.MINUTE,58);
+        cal_alarm.set(Calendar.HOUR_OF_DAY,15);
+        cal_alarm.set(Calendar.MINUTE,50);
         cal_alarm.set(Calendar.SECOND,0);
         if(cal_alarm.before(cal_now)){
             cal_alarm.add(Calendar.DATE,1);
         }
 
         for(int i=0;i<3;i++) {
-            cal_alarm.set(Calendar.MINUTE,58+i);
+            //lo.execute("Test 1");
+            cal_alarm.set(Calendar.MINUTE,50+i);
             Log.i("check times","number"+i);
             Intent myIntent = new Intent(this, AlarmReceiver.class);
             PendingIntent pendingIntent = PendingIntent.getBroadcast(this, i, myIntent, 0);
